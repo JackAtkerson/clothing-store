@@ -12,6 +12,9 @@ const ProductSchema = new Schema({
     },
     quantity: {
         type: Number
+    },
+    image: {
+        type: Image
     }
 });
 
