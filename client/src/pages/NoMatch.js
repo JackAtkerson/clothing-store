@@ -14,7 +14,7 @@ function NoMatchStrap(props) {
       <Row>
         <Col className='text-center'>
         <h1 className="mt-4">Sorry, the page that you are looking for is not here</h1>
-          <Image fluid src="./images/umbro2.jpg" alt="sad puppy" fluid/>
+          <Image  src="./images/umbro2.jpg" alt="shirt"/>
         
           <Button className="m-4" variant='secondary' href='/menu' size='lg' fluid>
               Check Out Our Clothes Store

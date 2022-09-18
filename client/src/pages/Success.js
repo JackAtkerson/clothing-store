@@ -18,7 +18,7 @@ function Success() {
             const clothes = cart.map(item => item._id);
 
             if (clothes.length) {
-                const { data } = await addOrder({ variables: { Clothes } });
+                const { data } = await addOrder({ variables: { clothes } });
                 const clotheData = data.addOrder.clothes;
 
                 clotheData.forEach((item) => {

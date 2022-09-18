@@ -34,7 +34,7 @@ function History() {
         <Row>
           <Col className="text-center">
             <Button className="m-4" variant='secondary' href='/menu' size='lg' fluid>
-              Order Drinks
+              Order Clothes
             </Button>
             {user ? (
               <>
@@ -45,7 +45,7 @@ function History() {
 
                     <Card>
                       <h3>{new Date(parseInt(order.purchaseDate)).toLocaleDateString()}</h3>
-                      {order.drinks.map(({ _id, image, name, price }, index) => (
+                      {order.clothes.map(({ _id, image, name, price }, index) => (
                         <Row className="justify-content-md-center">
                         <Col xs={6} md={4} key={index}>
                           <a href='/menu'>

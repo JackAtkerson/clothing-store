@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ClothesCard from "../ClothesCard";
 import { useStoreContext } from "../../utils/GlobalState";
-import { UPDATE_ClOTHES, UPDATE_DRINKS } from "../../utils/actions";
+import { UPDATE_ClOTHES } from "../../utils/actions";
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_CLOTHES } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
@@ -50,7 +50,7 @@ function ClothesList({clothes}) {
             <h2>Pick your clothes</h2>
             {state.clothes.length ? (
                 <Grid templateColumns={["repeat(1, 1fr)","repeat(1, 1fr)","repeat(3, 1fr)","repeat(3, 1fr)"]} gap={3}>
-                    {filterDrinks().map(clothes => (
+                    {filterClothes().map(clothes => (
                         <ClothesCard
                         key= {clothes._id}
                         item={clothes}
@@ -67,4 +67,4 @@ function ClothesList({clothes}) {
   );
 }
 
-export default clothesList;
+export default ClothesList;
