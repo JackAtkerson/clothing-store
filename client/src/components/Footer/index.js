@@ -10,8 +10,7 @@ function FooterStrap(props) {
             <small className="text-muted">
                 &copy; {new Date().getFullYear()} All Rights Reserved. Designed &amp; developed by <a href="" target="blank">
                 </a>, <a href="https://github.com/tmashoro" target="blank"> Terrence M</a>, <a href="https://github.com/JackAtkerson"
-                target="blank">Jack</a>, <a href="" target="blank">
-                </a> &amp; <a href="" target="blank"></a>
+                target="blank">Jack</a>, 
             </small>
             </CardHeader>
         </Card>
