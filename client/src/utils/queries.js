@@ -3,8 +3,8 @@ import gql from "graphql-tag";
 
 
 export const QUERY_CLOTHES = gql`
-  query getCLOTHES($category: ID) {
-    drinks(category: $category) {
+  query getClothes($category: ID) {
+    clothes(category: $category) {
       _id
       name
       description
