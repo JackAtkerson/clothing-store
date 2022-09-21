@@ -16,7 +16,6 @@ module.exports = {
 
     console.log("token", token)
 
-
     if (!token) {
       return req;
     }
@@ -33,7 +32,7 @@ module.exports = {
   },
   signToken: function ({ firstName, email, _id }) {
     const payload = { firstName, email, _id };
-
+    
     return jwt.sign(
       { data: payload },
       secret,
