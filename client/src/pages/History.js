@@ -33,7 +33,7 @@ function History() {
       <Container>
         <Row>
           <Col className="text-center">
-            <Button className="m-4" variant='secondary' href='/menu' size='lg' fluid>
+            <Button className="m-4" variant='secondary' href='/shop' size='lg' fluid>
               Order Clothes
             </Button>
             {user ? (

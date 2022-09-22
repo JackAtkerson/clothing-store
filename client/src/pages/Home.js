@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Jumbotron, Button, Container, Row, Col, Image } from 'react-bootstrap';
-//import Videot from  "../public/images/videote.mp4"
+//import Videot from  "../"
 
 
 function HomeStrap(props) {
@@ -11,7 +11,7 @@ function HomeStrap(props) {
             <Container>
 
             <video autoplay muted loop>  
-              <source src= 'https://youtu.be/CYRENWT8lz8' type="video/mp4"/>
+              <source src= 'Videot' type="video/mp4"/>
             </video>
 
                 <Row>

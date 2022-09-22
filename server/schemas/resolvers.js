@@ -4,77 +4,76 @@ const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
-  Query: {
-    categories: async () => {
-      return await Category.find();
-    },
-    products: async (parent, { category, name }) => {
-      const params = {};
 
-      if (category) {
-        params.category = category;
-      }
+    Query: {
+      categories: async () => {
+        return await Category.find();
+      },
+      // get all clothes
+      clothes: async (parent, { category, name }) => {
+        const params = {};
 
-      if (name) {
-        params.name = {
-          $regex: name
-        };
-      }
+        if (category) {
+          params.category = category;
+        }
 
-      return await Product.find(params).populate('category');
-    },
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate('category');
-    },
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
+        if(name) {
+          params.name = {
+            $regex: name
+          };
+        }
+        return await Clothes.find(params).populate('category');
+      },
+      // get one shirt
+      clothe: async (parent, {_id}) => {
+        return await Product.findById(_id).populate('category');
+      },
+      // checkout
+      order: async (parent, { _id }, context) => {
+        if (context.user) {
+          const user = await User.findById(context.user._id).populate({
+            path: 'orders.clothes'
+          });
+  
+          return user.orders.id(_id);
+        }
+  
+        throw new AuthenticationError('Not logged in');
+      },
+      // stripe
+      checkout: async (parent, args, context) => {
+        const url = new URL(context.headers.referer).origin;
+        const order = new Order({ clothes: args.clothes });
+        const line_items = [];
+  
+        const { clothes } = await order.populate('clothes').execPopulate();
+  
+        for (let i = 0; i < drinks.length; i++) {
+          const clothes = await stripe.products.create({
+            name: clothes[i].name,
+            description: clothes[i].description,
+            images: [`${url}/images/${clothes[i].image}`]
+          });
+  
+          const price = await stripe.prices.create({
+            product: clothes.id,
+            unit_amount: clothes[i].price * 100,
+            currency: 'usd',
+          });
+  
+          line_items.push({
+            price: price.id,
+            quantity: 1
+          });
+        }
+        // stripe
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items,
+          mode: 'payment',
+          success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${url}/`
 
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
-        return user;
-      }
-
-      throw new AuthenticationError('Not logged in');
-    },
-    order: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
-
-        return user.orders.id(_id);
-      }
-
-      throw new AuthenticationError('Not logged in');
-    },
-    checkout: async (parent, args, context) => {
-      const url = new URL(context.headers.referer).origin;
-      const order = new Order({ products: args.products });
-      const line_items = [];
-
-      const { products } = await order.populate('products');
-
-      for (let i = 0; i < products.length; i++) {
-        const product = await stripe.products.create({
-          name: products[i].name,
-          description: products[i].description,
-          images: [`${url}/images/${products[i].image}`]
-        });
-
-        const price = await stripe.prices.create({
-          product: product.id,
-          unit_amount: products[i].price * 100,
-          currency: 'usd',
-        });
-
-        line_items.push({
-          price: price.id,
-          quantity: 1
         });
       }
 

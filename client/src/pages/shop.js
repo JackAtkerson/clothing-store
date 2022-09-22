@@ -12,7 +12,7 @@ import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_ClOTHES } from "../utils/actions";
 import { idbPromise } from "../utils/helpers";
 
-const Menu = () => {
+const Shop = () => {
     const [state, dispatch] = useStoreContext();
     const { loading, data } = useQuery(QUERY_ALL_CLOTHES);
 console.log("state", state);
@@ -35,7 +35,7 @@ console.log("state", state);
             })
         }
     }, [loading, data, dispatch]);
-
+console.log (state.clothes)
     return (
         <ThemeProvider theme={theme}>
             <Flex wrap="wrap" alignItems='center' justifyContent='center'>
@@ -43,7 +43,7 @@ console.log("state", state);
                     <Box p={5} alignItems='center' justifyContent='center'>
                         <CategoryM />
                     </Box>
-                    <ClothesList clothes={state.clothes}/>
+                    { <ClothesList clothes={state.clothes}/> }
                 </Box>
             </Flex>
             
@@ -52,4 +52,4 @@ console.log("state", state);
 };
 
 
-export default Menu;
+export default Shop;
