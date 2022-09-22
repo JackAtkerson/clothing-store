@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Order } = require('../models');
+const { User, Clothes, Category, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -25,9 +25,9 @@ const resolvers = {
         return await Clothes.find(params).populate('category');
       },
       // get one shirt
-      clothe: async (parent, {_id}) => {
-        return await Product.findById(_id).populate('category');
-      },
+      /*clothe: async (parent, {_id}) => {
+        return await Clothes.findById(_id).populate('category');
+      },*/
       // checkout
       order: async (parent, { _id }, context) => {
         if (context.user) {
@@ -46,17 +46,17 @@ const resolvers = {
         const order = new Order({ clothes: args.clothes });
         const line_items = [];
   
-        const { clothes } = await order.populate('clothes').execPopulate();
+        const { clothes } = await order.populate('clothes');
   
         for (let i = 0; i < drinks.length; i++) {
-          const clothes = await stripe.products.create({
+          const clothe = await stripe.clothes.create({
             name: clothes[i].name,
             description: clothes[i].description,
             images: [`${url}/images/${clothes[i].image}`]
           });
   
           const price = await stripe.prices.create({
-            product: clothes.id,
+            Clothes: clothe.id,
             unit_amount: clothes[i].price * 100,
             currency: 'usd',
           });
@@ -73,19 +73,9 @@ const resolvers = {
           mode: 'payment',
           success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
           cancel_url: `${url}/`
-
         });
-      }
 
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items,
-        mode: 'payment',
-        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`
-      });
-
-      return { session: session.id };
+        return { session: session.id };
     }
   },
   Mutation: {
@@ -95,10 +85,10 @@ const resolvers = {
 
       return { token, user };
     },
-    addOrder: async (parent, { products }, context) => {
+    addOrder: async (parent, { s }, context) => {
       console.log(context);
       if (context.user) {
-        const order = new Order({ products });
+        const order = new Order({ Clothes });
 
         await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 
@@ -114,10 +104,10 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    updateProduct: async (parent, { _id, quantity }) => {
+    updateClothes: async (parent, { _id, quantity }) => {
       const decrement = Math.abs(quantity) * -1;
 
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+      return await Clothes.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });

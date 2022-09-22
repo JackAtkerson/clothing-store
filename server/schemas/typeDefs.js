@@ -13,7 +13,7 @@ type Category {
     color: String
   }
   
-  type Product {
+  type Clothes {
     _id: ID
     name: String
     description: String
@@ -26,7 +26,7 @@ type Category {
   type Order {
     _id: ID
     purchaseDate: String
-    products: [Product]
+    clothes: [Clothes]
   }
 
   type User {
@@ -49,18 +49,17 @@ type Category {
   type Query {
     categories: [Category]
     clothes(category: ID, name: String): [Clothes]
-    clothes (_id :String ): Clothes
 
     user: User
     order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
+    checkout(clothes: [ID]!): Checkout
   }
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
+    addOrder(clothes: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
+    updateClothes(_id: ID!, quantity: Int!): Clothes
     login(email: String!, password: String!): Auth
   }
 `;
