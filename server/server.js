@@ -1,3 +1,4 @@
+
 // set up express server
 const express = require('express');
 const path = require('path');
@@ -15,6 +16,7 @@ const server = new ApolloServer({
 
 const app = express();
 server.applyMiddleware({ app });
+
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
