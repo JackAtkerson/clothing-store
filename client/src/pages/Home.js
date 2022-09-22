@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Jumbotron, Button, Container, Row, Col, Image } from 'react-bootstrap';
+//import Videot from  "../public/images/videote.mp4"
 
 
 function HomeStrap(props) {
@@ -8,6 +9,11 @@ function HomeStrap(props) {
     return (
         <Jumbotron style={{backgroundColor:'transparent'}} fluid>
             <Container>
+
+            <video autoplay muted loop>  
+              <source src= 'https://youtu.be/CYRENWT8lz8' type="video/mp4"/>
+            </video>
+
                 <Row>
                     <Col className='text-center'>
                         <Image src="./images/umbro2.jpg" alt="shirt" fluid />

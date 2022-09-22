@@ -9,7 +9,7 @@ import { ThemeProvider, Box, Grid, Flex} from '@chakra-ui/core';
 import theme from '../../theme/theme';
 
 
-function ClothesList({clothes}) {
+function clothesList({clothes}) {
   const [state, dispatch] = useStoreContext();
 
   const { currentCategory } = state;
@@ -22,8 +22,8 @@ function ClothesList({clothes}) {
            type: UPDATE_ClOTHES,
           clothes: data.clothes
         });
-        data.clothes.forEach((clothe) => {
-          idbPromise('clothes', 'put', clothe);
+        data.clothes.forEach((clothes) => {
+          idbPromise('clothes', 'put', clothes);
         });
     } else if (!loading) {
       idbPromise('clothes', 'get').then((clothes) => {
@@ -40,7 +40,7 @@ function ClothesList({clothes}) {
       return state.clothes;
     }
 
-    return state.clothes.filter(clothe => clothe.category._id === currentCategory);
+    return state.clothes.filter(clothes => clothes.category._id === currentCategory);
   }
 
   return (
@@ -67,4 +67,4 @@ function ClothesList({clothes}) {
   );
 }
 
-export default ClothesList;
+export default clothesList;
