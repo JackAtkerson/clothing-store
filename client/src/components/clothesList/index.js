@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import ClothesCard from "../ClothesCard";
+import { useQuery } from '@apollo/react-hooks';
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_ClOTHES } from "../../utils/actions";
-import { useQuery } from '@apollo/react-hooks';
+//import { useQuery } from '@apollo/client';
+
 import { QUERY_CLOTHES } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 import { ThemeProvider, Box, Grid, Flex} from '@chakra-ui/core';
 import theme from '../../theme/theme';
 
 
-function clothesList({clothes}) {
+function ClothesList({clothes}) {
   const [state, dispatch] = useStoreContext();
 
   const { currentCategory } = state;
@@ -67,4 +69,4 @@ function clothesList({clothes}) {
   );
 }
 
-export default clothesList;
+export default ClothesList;

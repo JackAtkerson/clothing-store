@@ -8,7 +8,7 @@ import ApolloClient from 'apollo-boost';
 import { StoreProvider } from './utils/GlobalState';
 
 import HomeStrap from './pages/Home';
-import Menu from './pages/Menu';
+import shop from './pages/shop';
 import MyOrder from './pages/MyOrder';
 import History from './pages/History';
 import SignupStrap from './pages/Signup';
@@ -43,7 +43,7 @@ function App() {
               <NavStrap />
               <Switch>
                 <Route exact path="/" component={HomeStrap} />
-                <Route exact path="/menu" component={Menu} />
+                <Route exact path="/shop" component={shop} />
                 <Route exact path="/login" component={LoginStrap} />
                 <Route exact path="/signup" component={SignupStrap} />
                 <Route exact path="/cart" component={MyOrder} />

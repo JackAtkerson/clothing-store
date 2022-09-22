@@ -24,7 +24,7 @@ const resolvers = {
         return await Clothes.find(params).populate('category');
       },
       // get one shirt
-      clothes: async (parent, {_id}) => {
+      clothe: async (parent, {_id}) => {
         return await Product.findById(_id).populate('category');
       },
       // checkout

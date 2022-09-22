@@ -16,7 +16,7 @@ function NoMatchStrap(props) {
         <h1 className="mt-4">Sorry, the page that you are looking for is not here</h1>
           <Image  src="./images/umbro2.jpg" alt="shirt"/>
         
-          <Button className="m-4" variant='secondary' href='/menu' size='lg' fluid>
+          <Button className="m-4" variant='secondary' href='/shop' size='lg' fluid>
               Check Out Our Clothes Store
           </Button>
           
