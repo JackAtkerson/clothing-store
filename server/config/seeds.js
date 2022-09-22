@@ -1,5 +1,5 @@
 const db = require('./connection');
-const { User, Drink, Category, Clothes } = require('../models');
+const { User, Category, Clothes } = require('../models');
 
 db.once('open', async () => {
     await Category.deleteMany();
@@ -98,7 +98,7 @@ db.once('open', async () => {
     //     
     ]);
 
-    console.log('drinks seeded');
+    console.log('clothes seeded');
 
     await User.deleteMany();
 

@@ -5,7 +5,7 @@ import { ThemeProvider, Flex, Box, Grid} from '@chakra-ui/core';
 import theme  from '../theme/theme';
 
 import CategoryM from "../components/CategoryM";
-import clothesList from "../components/clothesList";
+import ClothesList from "../components/clothesList";
 //import ClothesCard from '../components/ClothesCard';
 import { QUERY_ALL_CLOTHES } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
@@ -43,7 +43,7 @@ console.log("state", state);
                     <Box p={5} alignItems='center' justifyContent='center'>
                         <CategoryM />
                     </Box>
-                    <clothesList clothes={state.clothes}/>
+                    <ClothesList clothes={state.clothes}/>
                 </Box>
             </Flex>
             
