@@ -11,3 +11,20 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+  .logo {
+    width: 300px;
+    height: 300px;
+  }
+
+  .home {
+    color: white;
+  }
+
+  #video {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height:fit-content;
+    filter: blur(4px);
+  }
